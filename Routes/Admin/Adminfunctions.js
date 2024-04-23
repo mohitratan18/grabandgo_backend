@@ -5,6 +5,10 @@ const Products = require('../../DataModels/Products');
 // AddItems
 
 router.post('/additems',async(req,res)=>{
+    let approved = false;
+    if(req.body.approved){
+        approved = true;
+    }
     const {name,product_description,price,img} = req.body;
     try {
         const newproduct = await Products.create({
@@ -12,7 +16,7 @@ router.post('/additems',async(req,res)=>{
             product_description,
             price,
             img,
-            approved:false,
+            approved,
         })
         return res.status(201).json({"message":"ADDED"});
     } catch (error) {
@@ -37,7 +41,7 @@ router.post('/approve/:id',async(req,res)=>{
 router.post("/delete/:id",async(req,res)=>{
     const pid = req.params.id;
     try {
-        await mongoose.findByIdAndDelete(pid);
+        await Products.findByIdAndDelete(pid);
         return res.status(201).json({"message":"Deleted"});
     } catch (error) {
         console.log(error);
