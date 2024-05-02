@@ -23,6 +23,14 @@ const seller = new mongoose.Schema({
         type:String,
         required:true
     },
+    address:{
+        type:String,
+        required:true,
+    },
+    pincode:{
+        type:String,
+        required:true,
+    },
     inventory:[
         {
             productId:{
@@ -34,10 +42,6 @@ const seller = new mongoose.Schema({
             }
         }
     ]
-    // productId:[{
-    //     type:mongoose.Schema.Types.ObjectId,
-    //     ref:'Product'
-    // }]
 
 });
 const Seller = new mongoose.model('Seller',seller);

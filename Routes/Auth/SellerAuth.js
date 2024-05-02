@@ -8,7 +8,7 @@ const secret = "life gives you what you need not what you want";
 // seller login
 router.post("/login", async (req, res) => {
   const { name, shopName, password, email, shoplink } = req.body;
-  console.log(name, shopName, password, email, shoplink);
+//   console.log(name, shopName, password, email, shoplink);
   let status = false;
   try {
     const newseller = await Seller.findOne({email});
@@ -35,11 +35,11 @@ router.post("/login", async (req, res) => {
 
 // seller signup
 router.post('/signup',async(req,res)=>{
-    const {password,email,name,phoneno,shoplink,shopName} = req.body;
-    console.log(password," ",email," ",name," ",phoneno);
+    const {password,email,name,phoneno,shoplink,shopName,pincode,address} = req.body;
+    console.log(password," ",email," ",name," ",phoneno," ",pincode," ",address);
     try {
         let status = false;
-        if(!password || !email ||!name ||!phoneno||!shopName||!shoplink){
+        if(!password || !email ||!name ||!phoneno||!shopName||!shoplink ||!pincode||!address){
            return res.status(401).json({"message":"please enter valid credentials or each and every detail",status})
         }
         const sellerfind = await Seller.findOne({email:email});
@@ -58,7 +58,9 @@ router.post('/signup',async(req,res)=>{
             phoneno,
             shoplink,
             shopName,
-            password:pass
+            password:pass,
+            pincode,
+            address
         })
         // console.log(usercheck);
         const data = {
