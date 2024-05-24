@@ -27,9 +27,8 @@ const seller = new mongoose.Schema({
         type:String,
         required:true,
     },
-    pincode:{
+    coord:{
         type:String,
-        required:true,
     },
     inventory:[
         {

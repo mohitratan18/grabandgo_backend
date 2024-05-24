@@ -3,6 +3,8 @@ const User = require('../../DataModels/User');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const Auth = require('../../Middlewares/Auth')
+const { default: mongoose } = require('mongoose');
 const secret = "life gives you what you need not what you want";
 
 // User login
@@ -78,5 +80,6 @@ router.post('/signup',async(req,res)=>{
         // console.log(error);
     }
 });
+
 
 module.exports = router;

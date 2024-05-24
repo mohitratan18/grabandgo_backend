@@ -174,3 +174,30 @@ router.post("/items/delete/:id", Auth, async (req, res) => {
 });
 
 module.exports = router;
+
+// fetch seller details
+
+router.post("/fetchseller", Auth, async (req, res) => {
+  try {
+    const user = await Seller.findOne({ _id: req.user.id });
+    return res.status(201).json(user);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// update address
+
+router.post("/update/address", Auth, async (req, res) => {
+  try {
+    const user = await Seller.findOneAndUpdate(
+      {
+        _id: req.user.id,
+      },
+      { coord: req.body.coord, address: req.body.address }
+    );
+    return res.status(201).json({ message: "Updated Successfuly" });
+  } catch (error) {
+    console.log(error);
+  }
+});
